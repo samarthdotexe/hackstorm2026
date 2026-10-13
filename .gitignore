@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.streamlit/secrets.toml
+frontend/node_modules/
+frontend/.next/
+frontend/coverage/
+frontend/.env*.local
+frontend/*.tsbuildinfo

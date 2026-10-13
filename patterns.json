@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "description": "Community-maintained ScamShield detection patterns. Contributions should include a clear tactic, explanation, and conservative weight.",
+  "patterns": [
+    {
+      "id": "otp-request",
+      "regex": "\\b(?:otp|one[ -]?time password)\\b.{0,45}\\b(?:share|send|tell|provide|verify)\\b|\\b(?:share|send|tell|provide)\\b.{0,45}\\botp\\b",
+      "weight": 42,
+      "tactic": "OTP theft",
+      "explanation": "Banks and legitimate services do not ask you to share an OTP."
+    },
+    {
+      "id": "upi-collect",
+      "regex": "\\b(?:approve|accept|enter.{0,15}pin).{0,30}\\bupi\\b|\\bupi\\b.{0,30}\\bcollect request\\b",
+      "weight": 45,
+      "tactic": "UPI collect request",
+      "explanation": "Receiving money does not require approving a collect request or entering a UPI PIN."
+    },
+    {
+      "id": "qr-receive-money",
+      "regex": "\\bscan\\b.{0,35}\\bqr\\b.{0,55}\\b(?:receive|refund|cashback|credit)\\b|\\b(?:receive|refund|cashback)\\b.{0,55}\\bscan\\b.{0,25}\\bqr\\b",
+      "weight": 40,
+      "tactic": "QR payment reversal",
+      "explanation": "Scanning a QR code generally initiates a payment; it is not required to receive money."
+    },
+    {
+      "id": "credential-request",
+      "regex": "\\b(?:password|pin|cvv|card number|bank details|login credentials)\\b.{0,35}\\b(?:share|send|enter|provide|confirm|verify)\\b|\\b(?:share|send|enter|provide)\\b.{0,35}\\b(?:password|pin|cvv)\\b",
+      "weight": 45,
+      "tactic": "Credential theft",
+      "explanation": "The message asks for sensitive credentials that legitimate organizations should not request by message."
+    },
+    {
+      "id": "kyc-account-threat",
+      "regex": "\\bkyc\\b.{0,70}\\b(?:expire|suspend|block|deactivate|update now)\\b|\\b(?:account|wallet)\\b.{0,45}\\b(?:block|suspend)\\b.{0,35}\\bkyc\\b",
+      "weight": 34,
+      "tactic": "KYC account threat",
+      "explanation": "Fraudsters impersonate banks and wallets with urgent KYC suspension threats."
+    },
+    {
+      "id": "digital-arrest",
+      "regex": "\\b(?:digital arrest|cyber police|cbi officer|crime branch|money laundering case)\\b",
+      "weight": 55,
+      "tactic": "Authority impersonation",
+      "explanation": "Indian authorities do not conduct a 'digital arrest' or demand payment over a call."
+    },
+    {
+      "id": "parcel-customs",
+      "regex": "\\b(?:parcel|courier|fedex)\\b.{0,80}\\b(?:customs|narcotics|illegal|seized|police)\\b",
+      "weight": 42,
+      "tactic": "Parcel or customs impersonation",
+      "explanation": "Unexpected parcel accusations are commonly used to frighten victims into paying or revealing details."
+    },
+    {
+      "id": "remote-access-app",
+      "regex": "\\b(?:anydesk|teamviewer|quicksupport|screen share|remote access app)\\b",
+      "weight": 44,
+      "tactic": "Remote device takeover",
+      "explanation": "Remote-access software can let a scammer view sensitive information and control the device."
+    },
+    {
+      "id": "job-registration-fee",
+      "regex": "\\b(?:job|work from home|interview|recruiter)\\b.{0,90}\\b(?:registration|training|processing|security) fee\\b|\\bpay\\b.{0,35}\\b(?:registration|training) fee\\b",
+      "weight": 40,
+      "tactic": "Fake job advance fee",
+      "explanation": "Legitimate employers do not require candidates to pay registration or interview fees."
+    },
+    {
+      "id": "advance-fee",
+      "regex": "\\b(?:processing|registration|security|release|training|interview) fee\\b|\\bpay\\b.{0,30}\\b(?:fee|deposit)\\b",
+      "weight": 32,
+      "tactic": "Advance-fee demand",
+      "explanation": "Upfront fees are common in fake jobs, prizes, refunds, and loan scams."
+    },
+    {
+      "id": "prize-lottery",
+      "regex": "\\b(?:won|winner|selected)\\b.{0,45}\\b(?:lottery|prize|reward|cashback)\\b|\\bclaim\\b.{0,30}\\b(?:prize|reward)\\b",
+      "weight": 30,
+      "tactic": "Unexpected prize lure",
+      "explanation": "Unexpected winnings are often used to collect fees, credentials, or personal data."
+    },
+    {
+      "id": "electricity-disconnect",
+      "regex": "\\b(?:electricity|power)\\b.{0,55}\\b(?:disconnect|cut off|suspend)\\b.{0,45}\\b(?:today|tonight|immediately)\\b",
+      "weight": 34,
+      "tactic": "Utility disconnection threat",
+      "explanation": "Urgent electricity disconnection messages often impersonate utility providers."
+    },
+    {
+      "id": "sim-block",
+      "regex": "\\b(?:sim|mobile number)\\b.{0,45}\\b(?:block|suspend|deactivate)\\b",
+      "weight": 28,
+      "tactic": "SIM suspension threat",
+      "explanation": "Threats to immediately block a SIM are used to push victims toward fake support channels."
+    },
+    {
+      "id": "urgent-pressure",
+      "regex": "\\b(?:urgent|immediately|act now|within \\d+ (?:minutes?|hours?)|final warning|last chance)\\b",
+      "weight": 18,
+      "tactic": "Artificial urgency",
+      "explanation": "Time pressure is used to prevent careful verification."
+    },
+    {
+      "id": "secrecy-request",
+      "regex": "\\b(?:do not tell|keep this confidential|don't inform|stay on the call|do not disconnect)\\b",
+      "weight": 24,
+      "tactic": "Isolation and secrecy",
+      "explanation": "Scammers isolate victims so trusted people cannot challenge the story."
+    },
+    {
+      "id": "gift-card-crypto-payment",
+      "regex": "\\b(?:gift cards?|bitcoin|usdt|cryptocurrency)\\b.{0,50}\\b(?:pay|payment|send|transfer|buy)\\b|\\b(?:pay|send|transfer|buy)\\b.{0,50}\\b(?:gift cards?|bitcoin|usdt)\\b",
+      "weight": 38,
+      "tactic": "Hard-to-reverse payment",
+      "explanation": "Gift cards and cryptocurrency are favored because payments are difficult to reverse."
+    }
+  ]
+}
